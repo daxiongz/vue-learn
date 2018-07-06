@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind 实例</title>
+    <script src="../assets/vue.js"></script>
+    <style>
+        .classA{
+            color: red;
+        }
+        .classB{
+            color: gray;
+        }
+        .classC{
+            color: blueviolet;
+        }
+        .fontBig{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>v-bind 实例</h1>
+    <p>v-bind 用来绑定 HTML 标签属性</p>
+    <p>v-bind 可缩写为 “:”</p>
+    <hr>
+    <div id="app">
+        <img v-bind:src="imgSrc" alt="绑定图片src">
+        <p>Vue 官网：<a :href="hrefUrl"></a></p>
+        <h3>绑定css样式</h3>
+        <hr>
+        <h4>1、直接绑定class样式</h4>
+        <div :class="className">1、绑定classA</div>
+        <h4>2、绑定class时进行判断，符合条件生效</h4>
+        <div :class="{classA: isOK}">2、绑定时进行判断</div>
+        <h4>3、绑定class数组</h4>
+        <div :class="[classC, fontBig]">3、绑定class数组</div>
+        <h4>4、绑定class使用三元表达式</h4>
+        <div :class="isOK ? classC : fontBig">4、绑定class使用三元表达式</div>
+        <h4>5、绑定style</h4>
+        <div :style="{color: c, fontSize: num + 'px'}">5、绑定style</div>
+        <h4>5、绑定style对象</h4>
+        <div :style="styleObj">5、绑定style对象</div>
+        <div :style="[styleObj, styleObj2]">绑定style对象数组</div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                imgSrc: "https://cn.vuejs.org/images/logo.png",
+                hrefUrl: "https://cn.vuejs.org",
+                className: "classA",
+                isOK: true,
+                classC: "classC",
+                fontBig: "fontBig",
+                c: "pink",
+                num: 32,
+                styleObj: {
+                    color: "blue",
+                    fontSize: "22px"
+                },
+                styleObj2: {
+                    color: "gray",
+                    fontSize: "32px"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

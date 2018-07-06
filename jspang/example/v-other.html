@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-pre & v-cloak & v-once 实例</title>
+    <script src="../assets/vue.js"></script>
+    <style>
+        [v-cloak] {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>v-pre & v-cloak & v-once 实例</h1>
+    <hr>
+    <div id="app">
+        <p>v-pre 指令，跳过该元素及其子元素编译过程，直接展示原始数据</p>
+        <p v-pre v-text="message">{{ message }}</p>
+        <p>v-cloak 指令，常与 css 一起使用, css 规则保持在元素上，直到实例编译完成</p>
+        <div v-cloak>{{ message }}</div>
+        <p>v-once 指令, 第一次加载 DOM 时进行渲染，后面都视为静态内容，不再变动</p>
+        <div v-once>初始绑定值： {{ message }}</div>
+        <div><input type="text" v-model="message"></div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "{121}"
+            }
+        })
+    </script>
+</body>
+</html>

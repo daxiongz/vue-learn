@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.directive 自定义指令 实例</title>
+    <script src="../assets/vue.js"></script>
+</head>
+<body>
+    <h1>Vue.directive 自定义指令 实例</h1>
+    <hr>
+    <h3>需要实现的例子：</h3>
+    <div id="app">
+        <p v-text="message"></p>
+        <button @click="add">加分</button>
+    </div>
+    <h3>使用Vue.directive 实现例子：</h3>
+    <div id="app2">
+        <p v-text="num" v-daxiong="color"></p>
+        <button @click="add">jia</button>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 0
+            },
+            methods: {
+                add: () => app.message += 1
+            }
+        })
+
+        let unbind = () => {
+            app2.$destroy();
+        };
+
+        // function unbind() {
+        //     app2.$destroy()
+        // }
+        // 自定义指令时不需要带 v- , Vue 的指令自带 v-
+        Vue.directive("daxiong", {
+            // 第一次绑定到元素时调用
+            bind: (el, binding, vnode) => {
+                /* var s = JSON.stringify;
+                el.innerHTML =
+                'name: '       + s(binding.name) + '<br>' +
+                'value: '      + s(binding.value) + '<br>' +
+                'expression: ' + s(binding.expression) + '<br>' +
+                'argument: '   + s(binding.arg) + '<br>' +
+                'modifiers: '  + s(binding.modifiers) + '<br>' +
+                'vnode keys: ' + Object.keys(vnode).join(', '); */
+                el.style = "color: " + binding.value;
+
+                console.log("1 - bind");
+            },
+            // 被插入父节点时调用，父节点存在即可
+            inserted: () => console.log("2 - inserted"),
+            // 被绑定元素所处模板更新时调用，也就是组件更新时调用
+            update: () => console.log("3 - update"),
+            //组件更新完成时
+            componentUpdated: () => console.log("4 - componentUpdated"),
+            // 解绑
+            unbind: () => console.log("5 - unbind")
+        });
+        var app2 = new Vue({
+            el: "#app2",
+            data: {
+                num: 0,
+                color: "pink"
+            },
+            methods: {
+                add: () => app2.num++
+            }
+        })
+
+        /* 
+        解绑函数调用以后，Vue实例将会失效
+
+        unbind()
+         */
+    </script>
+</body>
+</html>
