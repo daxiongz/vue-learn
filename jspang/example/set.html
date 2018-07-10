@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue.set 全局操作</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p v-text="count"></p>
+    <ul>
+      <li v-for="item in arr">{{ item }}</li>
+    </ul>
+  </div>
+  <button onclick="add()">add</button>
+</body>
+<script>
+  var outData = {
+    count: 1,
+    arr: ["xxx", "daxiong", "dada"]
+  };
+  var app = new Vue({
+    el: "#app",
+    data: outData
+  });
+  function add() {
+    // app.count++;
+    // outData.count++;
+    // Vue.set(outData, 'count', 14);
+    outData.arr[0] = 'sb';
+  }
+</script>
+</html>

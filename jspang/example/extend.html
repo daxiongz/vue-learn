@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue.extend 扩展构造器实例</title>
+   <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <p>扩展构造器用于id：</p>
+  <div id="app"></div>
+  <p>扩展构造器用于标签，相当于组件：</p>
+  <extend-test></extend-test>
+</body>
+<script>
+  var authorExtend = Vue.extend({
+    template: "<p><a :href='authorUrl' >{{ authorName }}</a></p>",
+    data: function () {
+      return {
+        authorName: "daxiongz",
+        authorUrl: "http://www.baidu.com"
+      }
+    }
+  });
+
+  new authorExtend().$mount("#app");
+  new authorExtend().$mount("extend-test");
+</script>
+</html>
