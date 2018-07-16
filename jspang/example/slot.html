@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>内置组件-slot</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <h2>slot demo</h2>
+  <ol>
+    slot 可以在自定义组件时，给组件传递内容，组件接收内容并输出
+    <li>在 html 中用 slot 属性进行传值</li>
+    <li>在组件模版中用 slot 标签进行接收并予以展示</li>
+  </ol>
+  <div id="app">
+    <daxiongz>
+      <span slot="country">{{ message.country }}</span>
+      <span slot="person">{{ message.person }}</span>
+      <span slot="event">{{ message.event }}</span>
+    </daxiongz>
+  </div>
+
+  <template id="demo">
+    <div>
+        <p>国家：<slot name="country"></slot></p>
+        <p>主要人物：<slot name="person"></slot></p>
+        <p>代表事件：<slot name="event"></slot></p>
+    </div>
+  </template>
+
+</body>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      message: {
+        country: "唐",
+        person: "唐明皇",
+        event: "贵妃醉酒"
+      }
+    },
+    components: {
+      daxiongz: {
+        template: "#demo"
+      }
+    }
+  })
+</script>
+</html>

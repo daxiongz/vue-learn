@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>实例方法/生命周期</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <button onclick="destroy()">销毁</button>
+  <button onclick="reload()">重载</button>
+  <button onclick="nextTick()">nextTick</button>
+</body>
+<script>
+  var daxiongz = Vue.extend({
+    template: '<h3>这是扩展: {{ message }}</h3>',
+    data: function () {
+      return {
+        message: 'Hello World!'
+      }
+    },
+    beforeMount() {
+      console.log("beforeMount 挂载前");
+    },
+    mounted() {
+      console.log("mounted 挂载完成");
+    },
+    beforeDestroy() {
+      console.log("beforeDestroy 销毁前");
+    },
+    destroyed() {
+      console.log("destroyed 销毁完成");
+    },
+    beforeUpdate() {
+      console.log("beforeUpdate 数据更新前");
+    },
+    updated() {
+      console.log("updated 数据更新完成");
+    },
+  });
+  // $mount() 挂载之后返回的是一个实例
+  let vm = new daxiongz().$mount("#app");
+  console.log(vm);
+// 多数场景不应该这么销毁，应该使用 v-if 和 v-for 以数据驱动的方式来控制组件的生命周期
+  let destroy = () => {
+    vm.$destroy()
+  };
+
+  // 迫使 Vue 组件重新渲染
+  let reload = () => {
+    vm.$forceUpdate()
+  };
+  // $nextTick 回调函数 数据更新成功后调用，晚于 updated 钩子函数。
+  // 官方解释是： 将回调函数延迟至下次 Dom 更新后执行。其 this 自动绑定到调用它的实例上
+  let nextTick = () => {
+    vm.$nextTick(function () {
+      console.log("success? 这个时候消息改了么？")
+    });
+    vm.message = "change info!";
+    vm.$nextTick(function () {
+      console.log("success 消息修改成功！")
+    });
+  };
+</script>
+</html>

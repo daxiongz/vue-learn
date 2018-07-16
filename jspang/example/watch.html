@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>watch Option 观察选项学习</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>温度：{{ message }}°C</p>
+    <p>提示：{{ infor }}</p>
+    <p>钱：{{ outer }}</p>
+    <p>
+      <button @click="add">add</button>
+      <button @click="reduce">reduce</button>
+    </p>
+  </div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 21,
+      infor: '温度合适',
+      outer: '$'
+    },
+    methods: {
+      add: function () {
+        this.message+=8;
+      },
+      reduce: function () {
+        this.message-=8;
+      }
+    },
+    watch: {
+      message: function(newVal, oldVal) {
+        if (newVal >= 36) {
+          this.infor = '热死人了！不宜出门！';
+        } else if (newVal <= 0) {
+          this.infor = '有点儿冷哦，还是别出门了！';
+        } else {
+          this.infor = '温度适宜！'
+        }
+      }
+    }
+  });
+
+  app.$watch('message', function (newVal, oldVal) {
+    if (newVal >= 30) {
+      this.outer = '赢了会所嫩模';
+    } else {
+      this.outer = '输了下海干活';
+    }
+  })
+</script>
+</html>

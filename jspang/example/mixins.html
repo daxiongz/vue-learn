@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mixins Option 混入选项学习</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <p><button @click="add">add</button></p>
+  </div>
+  <p>混入及原生生命周期选项的执行先后顺序：全局混入 > 选项混入 > 原生</p>
+  <p>对于混入的同名方法，只执行原始构造器中的方法</p>
+</body>
+<script>
+  var mixOption = {
+    updated() {
+      console.log("数据完成更新之后 " + this.message);
+    },
+    add: function () {
+      console.log("add--选项混入！");
+    }
+  };
+  var wholeMix = {
+    updated: function () {
+      console.log("这是全局混入的 updated ");
+    },
+    add: function () {
+      console.log("add--全局混入！");
+    }
+  };
+  Vue.mixin(wholeMix);
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 1
+    },
+    methods: {
+      add: function () {
+        console.log("构造器中原声add方法");
+        this.message++;
+      }
+    },
+    updated: function () {
+      console.log("这是原生的 updated");
+    },
+    mixins: [mixOption]
+  })
+</script>
+</html>

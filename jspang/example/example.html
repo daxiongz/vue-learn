@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>example methods</title>
+  <script src="../assets/vue.js"></script>
+  <script src="../assets/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+  </div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello World!'
+    },
+    // 只有在 mounted 和 created 钩子函数里 才能通过 jQuery 操作 Dom
+    mounted: function () {
+      $("#app").text("我是 jQuery!");
+    },
+    methods: {
+      add: function () {
+        console.log('这是构造器里的一个函数！');
+      }
+    }
+  });
+
+  app.add();
+</script>
+</html>

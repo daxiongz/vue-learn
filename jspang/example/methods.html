@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>methods Option 方法选项学习</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ num }}
+    <br>
+    <button @click="add(10, $event)">add</button>
+    <br>
+    <h5>内部组件调用父级构造器中的方法是，需要使用 .native 修饰符予以调用</h5>
+    <btn :style="redStyle" @click.native="add(2)"></btn>
+    <h5>全局组件调用构造器方法时，也需要使用 .native 修饰符予以调用</h5>
+    <new-link @click.native="add(30)"></new-link>
+    <h5>作用域内需要在组件中调用构造器中生成的方法时，都需要加上修饰符 .native </h5>
+  </div>
+  <h5>作用域外调用构造器里的方法</h5>
+  <button onclick="app.add(11)">外部调用</button>
+</body>
+<script>
+  var newLink = Vue.component("new-link", {
+    template: '<a href="javascript:;">{{ author }}</a>',
+    data: function () {
+      return {
+        author: "daxionhz"
+      }
+    }
+  });
+  var btn = {
+    template: '<button :style="blueStyle">内部组件</button>',
+    data: function () {
+      return {
+        blueStyle: {
+          color: 'blue'
+        }
+      }
+    }
+  }
+  var app = new Vue({
+    el: '#app',
+    data: {
+      num: 1,
+      redStyle: {
+        color: 'red',
+        fontSize: '20px'
+      }
+    },
+    methods: {
+      add: function (n, ev) {
+        console.log(n, ev);
+        if (n) {
+          this.num+=n;
+        } else {
+          this.num++;
+        }
+      }
+    },
+    components: {
+      "btn": btn
+    }
+  })
+</script>
+</html>

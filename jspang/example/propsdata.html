@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>propsData Option 学习</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <p>全局扩展 propsData 实例：</p>
+  <extend-test></extend-test>
+  <ol>
+    全局扩展 挂载数据时 传递参数通过 propsData 三个步骤：
+    <li>全局扩展挂载时，添加 propsData 予以接收，形如： {propsDta: {a: 1}}</li>
+    <li>扩展器构造器中，通过 props 选项进行传递。 形如： props: ["a"]</li>
+    <li>template 模版中插入对应参数。 形如： {{ a }}</li>
+  </ol>
+</body>
+<script>
+  var extendTest = Vue.extend({
+    template: '<h4>{{ message }} - {{ sure }}</h4>',
+    data: function () {
+      return {
+        message: 'Panda from China!'
+      }
+    },
+    props: ['sure']
+  });
+
+  new extendTest({propsData: {sure: true}}).$mount("extend-test");
+</script>
+</html>

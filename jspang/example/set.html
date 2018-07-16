@@ -29,7 +29,9 @@
     // app.count++;
     // outData.count++;
     // Vue.set(outData, 'count', 14);
-    outData.arr[0] = 'sb';
+    // 直接无法更改arr
+    // outData.arr[0] = 'sb';
+    Vue.set(outData.arr, 0, 'sss');
   }
 </script>
 </html>

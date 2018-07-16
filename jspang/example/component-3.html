@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>父子组件关系</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <p>多级组件嵌套使用时，尤其需要注意组件声明的先后关系。子组件应该在父组件中声明。在构造器外写局部组件内容时，定义应该先于使用。</p>
+  <div id="app">
+    <daxiongz></daxiongz>
+  </div>
+</body>
+<script>
+  var city = {
+    template: '<h4>He is from xian!</h4>'
+  };
+  var daxiongz = {
+    template: `
+    <div>
+      ike to eat yangroupaomo!</h3>
+      <city></city>
+    </div>
+    `,
+    components: {
+      'city': city
+    }
+  };
+  var app = new Vue({
+    el: '#app',
+    components: {
+      'daxiongz': daxiongz
+    }
+  })
+</script>
+</html>

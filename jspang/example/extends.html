@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>extends Option 扩展选项学习</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>${ message }</p>
+    <button @click="add">add</button>
+  </div>
+  <p>extends 选项中的钩子函数优先于原始构造器中的钩子函数。</p>
+  <p>extends 选项中与原始构造器的方法重名时，只有原始构造器中的方法生效。</p>
+</body>
+<script>
+  var extendTest = {
+    created: function () {
+      console.log('构造器中扩展的 created 方法！');
+    },
+    methods: {
+      add: function () {
+        console.log('构造器中扩展的 add 方法！');
+      }
+    }
+  };
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'extend option!'
+    },
+    methods: {
+      add: function () {
+        console.log('原始构造器中的 add 方法！');
+      }
+    },
+    created: function () {
+      console.log('原始的 created 钩子函数');
+    },
+    extends: extendTest,
+    // 改变纯文本插入分隔符
+    delimiters: ['${', '}']
+  });
+</script>
+</html>

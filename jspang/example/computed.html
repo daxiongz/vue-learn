@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>computed Option 计算选项学习</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <p>computed 选项在不改变数据源的情况下对数据进行改造输出，输出我们需要的形式</p>
+  <div id="app">
+      <p>1、格式化输出结果:</p>
+      <p>{{ price }} --> {{ newPrice }}</p>
+      <p>2、列表转换</p>
+      <ol>
+        <li v-for="item in newsList">{{ item.perid }} -- {{ item.represent }}</li>
+      </ol>
+      <ul>
+        <li v-for="item in newNewsList">{{ item.perid }} -- {{ item.represent }}</li>
+      </ul>
+      <p>{{ now }}</p>
+  </div>
+  <p>computed 选项中声明的值可以像 data 中的值一样使用</p>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      price: 100,
+      newsList: [
+        {
+          perid: '先秦',
+          represent: '诸子百家',
+          id: 0
+        },
+        {
+          perid: '大汉',
+          represent: '独尊儒术',
+          id: 1
+        },
+        {
+          perid: '盛唐',
+          represent: '万国来朝',
+          id: 3
+        }
+      ]
+    },
+    computed: {
+      newPrice: function () {
+        return '¥ ' + this.price + '元';
+      },
+      newNewsList: function () {
+        // let arr = this.newsList.reverse();
+        // // return arr.push({ perid: 'ttt', represent: 'ddd', id: 5});
+        // return arr;
+        let arr = this.newsList.filter(function (val) {
+          console.log(val);
+          return val.id > 0;
+        });
+        return arr;
+      },
+      now: function () {
+        return Date.now();
+      }
+    }
+  });
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>component-1 初识组件</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <p>组件，就是自定义 html 标签</p>
+  <div id="app">
+    <daxiongz></daxiongz>
+    <area-component></area-component>
+  </div>
+  <div id="app2">
+    <daxiongz></daxiongz>
+    <!-- <area-component></area-component> -->
+  </div>
+  <daxiongz></daxiongz>
+  <p>组件是自定义 html 标签，指令是 html 标签中的属性</p>
+  <p>全局注册组件是 Vue.component(), 局部注册组件是 components</p>
+</body>
+<script>
+  Vue.component('daxiongz', {
+    template: '<h2>这是一个全局组件</h2>'
+  })
+  var app = new Vue({
+    el: "#app",
+    components: {
+      'area-component': {
+        template: '<h3>这是一个局部组件</h3>'
+      }
+    }
+  });
+  var app2 = new Vue({
+    el: '#app2'
+  });
+</script>
+</html>

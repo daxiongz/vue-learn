@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>实例方法/事件</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+    <p><button @click="add">add</button></p>
+    <!-- <p><button @click="reduce">reduce_inner</button></p> -->
+  </div>
+  <p><button onclick="reduce()">reduce_outer</button></p>
+  <p><button onclick="reduceOne()">reduceOnce</button></p>
+  <p><button onclick="off()">off</button></p>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 1
+    },
+    methods: {
+      add: function () {
+        this.message++;
+      }
+    }
+  });
+  // $on 在构造器外部添加事件
+  app.$on("reduce", function () {
+    console.log("执行了 reduce");
+    this.message--;
+  });
+  // 如果按钮在作用域外部，需要用 $emit 触发当前实例上的事件
+  function reduce() {
+    app.$emit("reduce");
+  }
+  app.$once("reduceOne", function () {
+    console.log("只执行有一次的方法");
+    this.message+=10;
+  });
+  function reduceOne() {
+    app.$emit("reduceOne");
+  };
+  // $off() 无参数时，移除所以外部添加的事件；有参数时，移除参数指定的事件
+  function off() {
+    app.$off();
+  }
+</script>
+</html>

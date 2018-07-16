@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组建基础</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <h2>组件基础</h2>
+  <ul>
+    <li>组件时可复用的实例，所以它与 new Vue 接收相同的选项，如 data、methods、生命周期钩子函数等。
+      有两个例外，没有 el 这个关于根节点的选项；data 选项必须以方法形式返回值</li>
+    <li>一个组件的 data 选项必须时一个函数，这样才能保证每个组件维护一份被返回对象的独立拷贝，做到组件复但又不互相影响</li>
+  </ul>
+  <div id="app">
+    <button-click></button-click>
+    <button-click></button-click>
+    <button-click></button-click>
+  </div>
+</body>
+<script>
+  Vue.component('button-click', {
+    data: function () {
+      return {
+        count: 0
+      }
+    },
+    methods: {
+      calculate: function () {
+        this.count++;
+      }
+    },
+    template: '<button @click="calculate">You clicked me {{ count }} times.</button>'
+  });
+  var app = new Vue({
+    el: '#app'
+  });
+</script>
+</html>

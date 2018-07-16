@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Template 模版</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <h3>Template 模版三种方式</h3>
+  <p>第一种 Template 选项模版：</p>
+  <div id="demo1">
+    原始内容
+  </div>
+  <p>第二种 Template 标签模版：</p>
+  <div id="app2">
+    <template id="demo2">
+      <h2 style="color: red">这是标签模版</h2>
+    </template>
+  </div>
+  <div id="app3">
+    {{ message }}
+  </div>
+  <p>第三种 Template script标签模版</p>
+  <script type="x-template" id="demo3">
+    <h2 style="color: red;">这是 script 标签模版</h2>
+  </script>
+</body>
+<script>
+  var app1 = new Vue({
+    el: "#demo1",
+    template: `
+      <h2>这是选项模版</h2>
+      `
+  });
+  var app2 = new Vue({
+    el: "#app2",
+    template: "#demo2"
+  });
+  var app3 = new Vue({
+    el: "#app3",
+    data: {
+      message: 21
+    },
+    template: "#demo3"
+  })
+</script>
+</html>

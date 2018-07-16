@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>component 标签</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <p>component 标签，是用来绑定动态组件的，根据数据的不同选择不同的组件进行渲染</p>
+  <div id="app">
+    <component :is="componentId"></component>
+    <button @click="change">changeComponent</button>
+  </div>
+</body>
+<script>
+  var componentA = {
+    template: '<h2 style="color: red;">This is componentA</h2>'
+  };
+  var componentB = {
+    template: '<h2 style="color: yellow;">This is componentB</h2>'
+  };
+  var componentC = {
+    template: '<h2 style="color: green;">This is componentC</h2>'
+  };
+  var app = new Vue({
+    el: '#app',
+    data: {
+      componentId: 'componentA'
+    },
+    components: {
+      'componentA': componentA,
+      'componentB': componentB,
+      'componentC': componentC
+    },
+    methods: {
+      change: function () {
+        if (this.componentId == "componentA") {
+          this.componentId = "componentB";
+        } else if (this.componentId == "componentB") {
+          this.componentId = "componentC"
+        } else if (this.componentId == "componentC") {
+          this.componentId = "componentA"
+        }
+      }
+    }
+  });
+</script>
+</html>

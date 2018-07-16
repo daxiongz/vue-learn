@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件 props 属性设置</title>
+  <script src="../assets/vue.js"></script>
+</head>
+<body>
+  <ul>
+    <li>组件 props 的属性值可以在组件 template 模版中通过 {{}} 差值符来展示出来</li>
+    <li>组件 props 属性当需要通过连字符 - 连接字符串时，在 Vue 组件中需要用 小驼峰 命名法来完成；like-singer --> likeSinger</li>
+    <li>组件 props 属性需要绑定构造器中的 data 值时，使用指令 v-bind </li>
+  </ul>
+  <div id="app">
+    <daxiongz :hobit="message" like-singer="JJ"></daxiongz>
+  </div>
+</body>
+<script>
+  var daxiongz = {
+    template: '<h3>daxiong like eat {{ hobit }}, and like {{ likeSinger }}</h3>',
+    props: ['hobit', 'likeSinger']
+    
+  };
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'noodles'
+    },
+    components: {
+      'daxiongz': daxiongz
+    }
+  })
+</script>
+</html>
