@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>canvas learn</title>
+  <style>
+    #canvas {
+      background-color: azure;
+    }
+  </style>
+</head>
+<body>
+  <ul>canvas 学习
+    <li>canvas 在不设置长宽时，默认尺寸时 300px * 150px；背景色完全透明</li>
+    <li>尺寸建议使用 宽度 width 高度 height 属性为其设置</li>
+    <li>可以像普通 img 标签一样设置属性</li>
+    <li>替换内容：如同 video audio 等标签一样，浏览器支持时，会加载给标签；不支持该标签时，会忽略它，加载标签内部内容</li>
+  </ul>
+  <img src="https://hbimg.b0.upaiyun.com/3a7190ccfe9c2f0e66fcb3b7fa879024028591501738e-uLQu06_fw658" alt="canvas 失效内容">
+
+  <canvas id="canvas">
+    <img src="https://hbimg.b0.upaiyun.com/3a7190ccfe9c2f0e66fcb3b7fa879024028591501738e-uLQu06_fw658" alt="canvas 失效内容">
+    Your browser don't support the new tag!
+  </canvas>
+
+</body>
+<script>
+  // function createCanvas() {
+    var image = new Image()
+    image.src = './default-logo.png'
+    document.body.appendChild(image)
+    var canvas = document.createElement('canvas')
+    var context = canvas.getContext('2d')
+    console.log(image.width)
+    // canvas.width = image.width
+    // canvas.height = image.height
+    context.drawImage(image, 10, 10)
+    document.body.appendChild(canvas)
+  // }
+  // createCanvas()
+</script>
+</html>
