@@ -43,8 +43,13 @@
         :slot-scope-item="getItem"
       ></BigProps>
       <Info v-show="show === 5" 
-        v-model="phoneInfo" :zip-code.sync="zipCode"></Info>
+        :checkedv.sync="checkVal"
+        v-model="phoneInfo" 
+        :zip-code.sync="zipCode"></Info>
       <info
+        v-show="show === 5" 
+        :checkedv="checkVal"
+        @update:checkedv="val => checkVal = val"
         :phone-info="phoneInfo"
         @change="val => phoneInfo = val"
         :zip-code="zipCode"
@@ -103,7 +108,7 @@ export default {
         phone: "123"
       },
       zipCode: "300100",
-      checkVal: 1
+      checkVal: false
     };
   },
   methods: {
@@ -134,6 +139,11 @@ export default {
         this.$createElement("p", `item slot-scope ${JSON.stringify(props)}`)
       ];
     }
+  },
+  watch: {
+     checkVal: function (newVal, oldVal) {
+       console.log('new:', newVal, "<---", oldVal)
+     }
   }
 };
 </script>

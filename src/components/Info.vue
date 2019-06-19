@@ -6,7 +6,7 @@
     </select>
     <input :value="phoneInfo.phone" type="number" placeholder="手机号" @input="handlePhoneChange">
     <input :value="zipCode" type="number" placeholder="邮编" @change="handleZipCodeChange">
-    <input type="checkbox" :value="check" @change="handleCheck">
+    <input type="checkbox" :checked="checkedv" @change="handleCheck">
   </div>
 </template>
 <script>
@@ -23,13 +23,14 @@ export default {
     zipCode: {
       type: String
     },
-    checked: {
-      type: Number
+    checkedv: {
+      type: Boolean
     }
   },
   data() {
     return {
-      check: true
+      // check: this.checked
+      
     }
   },
   methods: {
@@ -49,14 +50,9 @@ export default {
       this.$emit("update:zipCode", e.target.value);
     },
     handleCheck(e) {
-      console.log(typeof(e.target.checked))
-      console.log(this.check)
-      this.$emit("update:checked", e.target.checked)
+      this.$emit("update:checkedv", e.target.checked)
+      console.log('indo:', e.target.checked)
     }
-  },
-  updated() {
-    console.log(this.phoneInfo);
-    console.log(this.zipCode);
   }
 };
 </script>
